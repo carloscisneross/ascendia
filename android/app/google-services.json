@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "83127338671",
+    "project_id": "ascendia-app-final",
+    "storage_bucket": "ascendia-app-final.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83127338671:android:bf7fb2565fb00689d3b65a",
+        "android_client_info": {
+          "package_name": "com.carlo.ascendia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsuWIyi51-Zhan8dDIOzU8Ha90xsRVCFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "personal": [
+    {"level":1, "name":"7 Days", "duration_days": 7, "normal":"assets/medals/personal/normal/level_1.png", "small":"assets/medals/personal/small/level_1.png"},
+    {"level":2, "name":"2 Weeks", "duration_days": 14, "normal":"assets/medals/personal/normal/level_2.png", "small":"assets/medals/personal/small/level_2.png"},
+    {"level":3, "name":"3 Weeks", "duration_days": 21, "normal":"assets/medals/personal/normal/level_3.png", "small":"assets/medals/personal/small/level_3.png"},
+    {"level":4, "name":"1 Month", "duration_days": 30, "normal":"assets/medals/personal/normal/level_4.png", "small":"assets/medals/personal/small/level_4.png"},
+    {"level":5, "name":"3 Months", "duration_days": 90, "normal":"assets/medals/personal/normal/level_5.png", "small":"assets/medals/personal/small/level_5.png"},
+    {"level":6, "name":"6 Months", "duration_days": 180, "normal":"assets/medals/personal/normal/level_6.png", "small":"assets/medals/personal/small/level_6.png"},
+    {"level":7, "name":"1 Year", "duration_days": 365, "normal":"assets/medals/personal/normal/level_7.png", "small":"assets/medals/personal/small/level_7.png"},
+    {"level":8, "name":"1.5 Years", "duration_days": 547, "normal":"assets/medals/personal/normal/level_8.png", "small":"assets/medals/personal/small/level_8.png"},
+    {"level":9, "name":"2 Years", "duration_days": 730, "normal":"assets/medals/personal/normal/level_9.png", "small":"assets/medals/personal/small/level_9.png"},
+    {"level":10, "name":"3 Years", "duration_days": 1095, "normal":"assets/medals/personal/normal/level_10.png", "small":"assets/medals/personal/small/level_10.png"},
+    {"level":11, "name":"4 Years", "duration_days": 1460, "normal":"assets/medals/personal/normal/level_11.png", "small":"assets/medals/personal/small/level_11.png"},
+    {"level":12, "name":"5 Years", "duration_days": 1825, "normal":"assets/medals/personal/normal/level_12.png", "small":"assets/medals/personal/small/level_12.png"}
+  ],
+  "guild": [
+    {"level":1, "name":"Wolf Pack", "normal":"assets/medals/guild/normal/level_1.png", "small":"assets/medals/guild/small/level_1.png"},
+    {"level":2, "name":"Lion Pride", "normal":"assets/medals/guild/normal/level_2.png", "small":"assets/medals/guild/small/level_2.png"},
+    {"level":3, "name":"Bear Clan", "normal":"assets/medals/guild/normal/level_3.png", "small":"assets/medals/guild/small/level_3.png"},
+    {"level":4, "name":"Eagle Aerie", "normal":"assets/medals/guild/normal/level_4.png", "small":"assets/medals/guild/small/level_4.png"},
+    {"level":5, "name":"Tiger Ambush", "normal":"assets/medals/guild/normal/level_5.png", "small":"assets/medals/guild/small/level_5.png"},
+    {"level":6, "name":"Serpent Coil", "normal":"assets/medals/guild/normal/level_6.png", "small":"assets/medals/guild/small/level_6.png"},
+    {"level":7, "name":"Kraken Deep", "normal":"assets/medals/guild/normal/level_7.png", "small":"assets/medals/guild/small/level_7.png"},
+    {"level":8, "name":"Hydra Brood", "normal":"assets/medals/guild/normal/level_8.png", "small":"assets/medals/guild/small/level_8.png"},
+    {"level":9, "name":"Dragon Hoard", "normal":"assets/medals/guild/normal/level_9.png", "small":"assets/medals/guild/small/level_9.png"},
+    {"level":10, "name":"Phoenix Rise", "normal":"assets/medals/guild/normal/level_10.png", "small":"assets/medals/guild/small/level_10.png"}
+  ],
+  "world": [
+    {"key":"regional", "name":"Regional Champion", "normal":"assets/medals/world/normal/regional.png", "small":"assets/medals/world/small/regional.png"},
+    {"key":"country",  "name":"Country Champion",  "normal":"assets/medals/world/normal/country.png",  "small":"assets/medals/world/small/country.png"},
+    {"key":"global",   "name":"Global Champion",   "normal":"assets/medals/world/normal/global.png",   "small":"assets/medals/world/small/global.png"}
+  ]
+}

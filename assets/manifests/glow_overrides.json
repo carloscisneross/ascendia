@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "personal": {
+    "1":{"enabled":false,"colors":[],"intensity":0.0,"style":"none"},
+    "2":{"enabled":false,"colors":[],"intensity":0.0,"style":"none"},
+    "3":{"enabled":false,"colors":[],"intensity":0.0,"style":"none"},
+    "4":{"enabled":false,"colors":[],"intensity":0.0,"style":"none"},
+    "5":{"enabled":true,"colors":["#AEE9FF"],"intensity":0.40,"style":"shimmer"},
+    "6":{"enabled":true,"colors":["#AEE9FF", "#56CCF2"],"intensity":0.45,"style":"shimmer"},
+    "7":{"enabled":true,"colors":["#F2C94C", "#F2994A"],"intensity":0.50,"style":"electric"},
+    "8":{"enabled":true,"colors":["#F2C94C", "#F2994A"],"intensity":0.55,"style":"electric"},
+    "9":{"enabled":true,"colors":["#27AE60", "#6FCF97"],"intensity":0.60,"style":"flame"},
+    "10":{"enabled":true,"colors":["#9B51E0", "#BB6BD9"],"intensity":0.65,"style":"flame"},
+    "11":{"enabled":true,"colors":["#EB5757", "#FFFFFF"],"intensity":0.70,"style":"prism"},
+    "12":{"enabled":true,"colors":["#FF5F6D","#FFC371","#A1FFCE","#64B3F4","#C779D0"],"intensity":0.80,"style":"prism"}
+  },
+  "guild": {
+    "1":{"enabled":true,"colors":["#7FDBFF"],"intensity":0.48,"style":"electric"},
+    "2":{"enabled":true,"colors":["#F2994A"],"intensity":0.50,"style":"electric"},
+    "3":{"enabled":true,"colors":["#8D6E63"],"intensity":0.52,"style":"electric"},
+    "4":{"enabled":true,"colors":["#BDBDBD"],"intensity":0.55,"style":"electric"},
+    "5":{"enabled":true,"colors":["#FF6F00"],"intensity":0.60,"style":"flame"},
+    "6":{"enabled":true,"colors":["#00796B"],"intensity":0.62,"style":"flame"},
+    "7":{"enabled":true,"colors":["#1976D2"],"intensity":0.65,"style":"flame"},
+    "8":{"enabled":true,"colors":["#558B2F"],"intensity":0.70,"style":"flame"},
+    "9":{"enabled":true,"colors":["#D4AF37", "#FFD700"],"intensity":0.80,"style":"prism"},
+    "10":{"enabled":true,"colors":["#FF4500","#FFD700","#FF8C00"],"intensity":0.90,"style":"flame"}
+  },
+  "world": {
+    "regional":{"enabled":false,"colors":[],"intensity":0.0,"style":"none"},
+    "country":{"enabled":true,"colors":["#F1F2F6","#F1C40F"],"intensity":0.35,"style":"shimmer"},
+    "global":{"enabled":true,"colors":["#FF5F6D","#FFC371","#A1FFCE","#64B3F4","#C779D0"],"intensity":0.75,"style":"prism"}
+  }
+}

@@ -1,0 +1,42 @@
+name: ascendia
+description: "Track your streak, earn medals, and ascend."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.1.0+2
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.4.9
+  shared_preferences: ^2.2.3
+  intl: ^0.19.0
+  cupertino_icons: ^1.0.2
+
+  # --- New dependencies for Auth, Database, Premium ---
+  firebase_core: ^3.4.0
+  firebase_auth: ^5.2.1
+  cloud_firestore: ^5.4.4
+  purchases_flutter: ^6.26.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/medals/personal/normal/
+    - assets/medals/personal/small/
+    - assets/medals/guild/normal/
+    - assets/medals/guild/small/
+    - assets/medals/world/normal/
+    - assets/medals/world/small/
+    - assets/icons/ios/
+    - assets/icons/android/
+    - assets/manifests/
+    - assets/avatars/
