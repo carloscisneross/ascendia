@@ -1,36 +1,27 @@
 plugins {
     id("com.android.application")
-    // START: FlutterFire Configuration
-    id("com.google.gms.google-services")
-    // END: FlutterFire Configuration
-    id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-    id("dev.flutter.flutter-gradle-plugin")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services") // Google Services plugin
+    id("dev.flutter.flutter-gradle-plugin") // must be after Android & Kotlin
 }
 
 android {
-    // Must match your Firebase registration
-    namespace = "com.carlo.ascendia"
-
+    namespace = "com.carlo.ascendia"        // MUST match Firebase package
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        // Use Java 17 for modern Firebase/AGP
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"                     // Fixes “Unknown Kotlin JVM target: 21”
     }
 
     defaultConfig {
-        // Must match your Firebase Android app package name
-        applicationId = "com.carlo.ascendia"
-
-        // Firebase requires minSdk 23+
-        minSdk = 23
+        applicationId = "com.carlo.ascendia" // MUST match Firebase Android app
+        minSdk = 23                          // Firebase requires 23+
         targetSdk = flutter.targetSdkVersion
 
         versionCode = flutter.versionCode
@@ -39,7 +30,7 @@ android {
 
     buildTypes {
         release {
-            // TODO: Replace with your real release signing config later
+            // TODO: replace with real signing for release
             signingConfig = signingConfigs.getByName("debug")
         }
     }

@@ -1,12 +1,9 @@
-// Add the buildscript block so the Google Services plugin can be resolved
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("com.google.gms:google-services:4.4.2")
-    }
+plugins {
+    // Declare plugin versions here; subprojects will apply them
+    id("com.android.application") version "8.6.0" apply false
+    id("com.android.library") version "8.6.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.24" apply false
+    id("com.google.gms.google-services") version "4.4.2" apply false
 }
 
 allprojects {
@@ -21,17 +18,12 @@ rootProject.layout.buildDirectory.value(newBuildDir)
 
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
-    project.layout.buildDirectory.value(newSubprojectBuildDir)
+    layout.buildDirectory.value(newSubprojectBuildDir)
 
-    // Ensure subprojects can resolve plugins/artifacts too
     repositories {
         google()
         mavenCentral()
     }
-}
-
-subprojects {
-    project.evaluationDependsOn(":app")
 }
 
 tasks.register<Delete>("clean") {
