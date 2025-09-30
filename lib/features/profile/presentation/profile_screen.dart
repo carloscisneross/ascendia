@@ -4,6 +4,8 @@ import '../../../core/providers.dart';
 import '../../../core/constants.dart';
 import '../../../data/services/streak_service.dart';
 import '../providers/avatar_providers.dart';
+import 'widgets/check_in_section.dart';
+import 'widgets/medals_section.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -67,6 +69,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         motive: 'Manual reset',
         note: 'Reset from profile screen',
       );
+
+      // Refresh providers
+      ref.invalidate(currentStreakProvider);
+      ref.invalidate(userProfileProvider);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -226,8 +232,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       children: [
                         // Avatar
                         Container(
-                          width: 120,
-                          height: 120,
+                          width: 100,
+                          height: 100,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(AppConstants.cardBorderRadius),
                             border: Border.all(
@@ -297,24 +303,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             ],
                           ),
                         ),
-                        
-                        const SizedBox(height: 16),
-                        
-                        // Change Avatar Button
-                        SizedBox(
-                          height: AppConstants.buttonHeight,
-                          child: OutlinedButton.icon(
-                            onPressed: _isLoading ? null : _changeAvatar,
-                            icon: const Icon(Icons.edit),
-                            label: const Text('Change Avatar'),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
+                
+                // Daily Check-in Section
+                const CheckInSection(),
+                
+                const SizedBox(height: 16),
                 
                 // Streak Stats
                 Card(
@@ -406,7 +405,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
+                
+                // Medals Section
+                const MedalsSection(),
+                
+                const SizedBox(height: 16),
                 
                 // Action Buttons
                 Card(
@@ -423,6 +427,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         ),
                         
                         const SizedBox(height: 16),
+                        
+                        // Change Avatar Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: AppConstants.buttonHeight,
+                          child: OutlinedButton.icon(
+                            onPressed: _isLoading ? null : _changeAvatar,
+                            icon: const Icon(Icons.edit),
+                            label: const Text('Change Avatar'),
+                          ),
+                        ),
+                        
+                        const SizedBox(height: 12),
                         
                         // Edit Goal Button
                         SizedBox(
