@@ -1,40 +1,38 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Profiles: each user can write only their own doc. Everyone can read (for avatars, names).
-    match /profiles/{uid} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == uid;
+
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(uid) { return isSignedIn() && request.auth.uid == uid; }
+
+    match /users/{uid} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(uid);
+      allow update, delete: if isOwner(uid);
     }
 
-    // Posts feed: world-readable; only authenticated users can create their own post and edit/delete it.
     match /posts/{postId} {
       allow read: if true;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.authorId;
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn() && resource.data.authorId == request.auth.uid;
     }
 
-    // Guilds
     match /guilds/{guildId} {
       allow read: if true;
-      // Only guild creator (ownerId) can update guild metadata
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && request.resource.data.ownerId == request.auth.uid;
+      allow create: if isSignedIn();
+      allow update, delete: if false; // keep strict; admins can be added later via Cloud Functions
+    }
 
-      // Members subcollection
-      match /guilds/{guildId}/members/{memberUid} {
-        allow read: if request.auth != null;
-        allow create: if request.auth != null && request.auth.uid == memberUid;
-        allow delete: if request.auth != null && (request.auth.uid == memberUid || exists(/databases/$(database)/documents/guilds/$(guildId)) && get(/databases/$(database)/documents/guilds/$(guildId)).data.ownerId == request.auth.uid);
-        allow update: if false; // not needed
-      }
+    match /guilds/{guildId}/members/{uid} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(uid);
+      allow delete, update: if isOwner(uid);
+    }
 
-      // Chat messages under a guild
-      match /guilds/{guildId}/messages/{msgId} {
-        allow read: if request.auth != null;
-        allow create: if request.auth != null; // could restrict to members-only; kept simple
-        allow update, delete: if request.auth != null && request.auth.uid == resource.data.authorId;
-      }
+    match /guilds/{guildId}/messages/{messageId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update, delete: if isSignedIn() && resource.data.authorId == request.auth.uid;
     }
   }
 }
