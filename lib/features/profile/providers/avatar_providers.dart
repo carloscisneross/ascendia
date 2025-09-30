@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/models/avatar.dart';
-import '../data/services/avatar_service.dart';
+import '../../../data/models/avatar.dart';
+import '../../../data/services/avatar_service.dart';
+import '../../../core/providers.dart';
 
 /// Avatar service provider
 final avatarServiceProvider = Provider<AvatarService>((ref) {
