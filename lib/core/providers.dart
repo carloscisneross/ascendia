@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data/services/auth_service.dart';
 import '../data/services/premium_service.dart';
+import '../data/services/profile_repository.dart';
 import '../data/models/models.dart';
 
 /// Authentication state provider - streams the current user
@@ -30,6 +31,11 @@ final premiumServiceProvider = Provider<PremiumService>((ref) {
   return PremiumService();
 });
 
+/// Profile repository provider
+final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
+  return ProfileRepository();
+});
+
 /// User profile document provider - streams user's Firestore profile
 final userProfileProvider = StreamProvider.family<DocumentSnapshot?, String>((ref, userId) {
   if (userId.isEmpty) {
@@ -39,6 +45,15 @@ final userProfileProvider = StreamProvider.family<DocumentSnapshot?, String>((re
       .collection('users')
       .doc(userId)
       .snapshots();
+});
+
+/// User profile model provider - streams parsed profile model
+final userProfileModelProvider = StreamProvider.family<Profile?, String>((ref, userId) {
+  if (userId.isEmpty) {
+    return Stream.value(null);
+  }
+  final profileRepo = ref.read(profileRepositoryProvider);
+  return profileRepo.watchProfile(userId);
 });
 
 /// Premium status provider - checks RevenueCat entitlement
