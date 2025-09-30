@@ -1,20 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/models.dart';
+import '../../core/constants.dart';
 
 class ProfileRepository {
-  final _col = FirebaseFirestore.instance.collection('profiles');
+  final _col = FirebaseFirestore.instance.collection('users');
 
-  Future<void> ensureProfile(String uid, {String? username}) async {
+  Future<void> ensureProfile(String uid, {String? username, String? avatarKey}) async {
     final doc = await _col.doc(uid).get();
     if (!doc.exists) {
-      final now = DateTime.now().toUtc();
+      final now = Timestamp.now();
       await _col.doc(uid).set({
         'username': username ?? 'Ascender',
         'streakStartedAt': now,
-        'goalInDays': 7,
+        'goalInDays': AppConstants.defaultStreakGoalDays,
         'isPremium': false,
+        'avatarKey': avatarKey ?? AppConstants.defaultFreeAvatarPath,
         'resetHistory': [],
-        'currentStreakDays': 0,
+        'createdAt': now,
+        'updatedAt': now,
       });
     }
   }
@@ -27,7 +30,7 @@ class ProfileRepository {
         userId: uid,
         username: data['username'] ?? 'Ascender',
         streakStartedAt: (data['streakStartedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-        goalInDays: (data['goalInDays'] ?? 7) as int,
+        goalInDays: (data['goalInDays'] ?? AppConstants.defaultStreakGoalDays) as int,
         isPremium: (data['isPremium'] ?? false) as bool,
         resetHistory: ((data['resetHistory'] ?? []) as List).map((e) => StreakReset(
           resetAt: (e['resetAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
@@ -38,33 +41,42 @@ class ProfileRepository {
     });
   }
 
-  Future<void> setAvatarPath(String uid, String avatarPath) async {
-    await _col.doc(uid).set({'avatarPath': avatarPath}, SetOptions(merge: true));
+  Future<void> setAvatarKey(String uid, String avatarKey) async {
+    await _col.doc(uid).update({
+      'avatarKey': avatarKey,
+      'updatedAt': Timestamp.now(),
+    });
   }
 
   Future<void> setPremium(String uid, bool isPremium) async {
-    await _col.doc(uid).set({'isPremium': isPremium}, SetOptions(merge: true));
+    await _col.doc(uid).update({
+      'isPremium': isPremium,
+      'updatedAt': Timestamp.now(),
+    });
   }
 
   Future<void> resetStreak(String uid, {required String motive, String? note}) async {
-    final now = DateTime.now().toUtc();
-    await _col.doc(uid).set({
+    final now = Timestamp.now();
+    await _col.doc(uid).update({
       'streakStartedAt': now,
       'resetHistory': FieldValue.arrayUnion([{
         'resetAt': now,
         'motive': motive,
         'note': note,
       }]),
-      'currentStreakDays': 0,
-    }, SetOptions(merge: true));
+      'updatedAt': now,
+    });
   }
 
-  Future<void> tickStreakDays(String uid) async {
-    final doc = await _col.doc(uid).get();
-    if (!doc.exists) return;
-    final data = doc.data()!;
-    final startedAt = (data['streakStartedAt'] as Timestamp?)?.toDate()?.toUtc() ?? DateTime.now().toUtc();
-    final days = DateTime.now().toUtc().difference(startedAt).inDays;
-    await _col.doc(uid).set({'currentStreakDays': days}, SetOptions(merge: true));
+  Future<void> setStreakGoal(String uid, int goalInDays) async {
+    await _col.doc(uid).update({
+      'goalInDays': goalInDays,
+      'updatedAt': Timestamp.now(),
+    });
+  }
+
+  Future<bool> isUsernameAvailable(String username) async {
+    final query = await _col.where('username', isEqualTo: username).limit(1).get();
+    return query.docs.isEmpty;
   }
 }
